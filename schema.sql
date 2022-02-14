@@ -10,7 +10,7 @@ CREATE TABLE `User` (
     `lname` varchar(128) NOT NULL,
     `phone` varchar(12) NOT NULL,
     `gender` INT NOT NULL,
-    `dateOfBirth` DATE NOT NULL CHECK `dateOfBirth` < CURDATE(),
+    `dateOfBirth` DATE NOT NULL,
     `profile_image_url` VARCHAR(128) NOT NULL,
     INDEX(`email`) USING BTREE
 );
