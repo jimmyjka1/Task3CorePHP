@@ -10,10 +10,36 @@ CREATE TABLE `User` (
     `lname` varchar(128) NOT NULL,
     `phone` varchar(12) NOT NULL,
     `gender` INT NOT NULL,
-    `dateOfBirth` DATE NOT NULL,
+    `dateOfBirth` DATE NOT NULL CHECK `dateOfBirth` < CURDATE(),
     `profile_image_url` VARCHAR(128) NOT NULL,
     INDEX(`email`) USING BTREE
 );
+
+
+DELIMITER $$
+CREATE TRIGGER date_check
+BEFORE INSERT ON `User`
+FOR EACH ROW 
+BEGIN 
+	IF NEW.dateOfBirth >= CURDATE() THEN
+    	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Date!';
+    END IF;
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE TRIGGER date_check_update
+BEFORE UPDATE ON `User`
+FOR EACH ROW 
+BEGIN 
+	IF NEW.dateOfBirth >= CURDATE() THEN
+    	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Date!';
+    END IF;
+END$$
+DELIMITER ;
+
+
 
 DROP TABLE IF EXISTS `ForgetPassword`;
 CREATE TABLE `ForgetPassword`(
