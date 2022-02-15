@@ -5,7 +5,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapsing">
         <ul class="navbar-nav ml-auto mr-4">
-            <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+            <li class="nav-item <?php if (isset($CURRENT_PAGE) && $CURRENT_PAGE == 'index'){ echo 'active'; } ?>"><a href="index.php" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Men's</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Women's</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Kids's</a></li>
@@ -19,12 +19,12 @@
                         echo '<div class="dropleft">
                         
                         <a class="dropdown-toggle nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                        <img src="'.$profile_url.'" id="profile_image" alt="this is great">
+                        <img src="'.$profile_url.'" id="profile_image" alt=".">
                             '.$_SESSION['fname']." ".$_SESSION['lname'].'
                         </a>
                         <div class="dropdown-menu">
-                            <a href="" class="dropdown-item">Edit Profile</a>
-                            <a href="" class="dropdown-item">Change Password</a>
+                            <a href="editProfile.php" class="dropdown-item">Edit Profile</a>
+                            <a href="changePassword.php" class="dropdown-item">Change Password</a>
                             <a href="logout.php" class="dropdown-item">Logout</a>
                         </div>
                         </div>';

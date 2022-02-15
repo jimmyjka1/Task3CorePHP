@@ -178,21 +178,21 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label for="input_last_name">
-                        Last Name:
+                        Last Name
                     </label>
                     <input type="text" class="form-control" name="last_name" id="input_last_name">
 
                 </div>
                 <div class="form-group">
                     <label for="input_email">
-                        Email:
+                        Email
                     </label>
-                    <input type="e,ao;" class="form-control" name="email" id="input_email">
+                    <input type="email" class="form-control" name="email" id="input_email">
 
                 </div>
                 <div class="form-group">
                     <label for="input_password_1">
-                        Enter Password:
+                        Enter Password
                     </label>
                     <input type="password" name="password_1" id="input_password_1" class="form-control">
 
@@ -206,7 +206,7 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label for="input_phone">
-                        Enter Phone Number:
+                        Enter Phone Number
                     </label>
                     <input type="tel" name="phone" id="input_phone" class="form-control">
 
@@ -214,7 +214,7 @@ if (isset($_POST['submit'])) {
 
                 <div class="form-group">
                     <label for="input_gender">
-                        Select Gender:
+                        Select Gender
                     </label>
                     <select name="gender" id="input_gender" class="custom-select">
                         <option value="" selected>Select Gender</option>
@@ -226,7 +226,7 @@ if (isset($_POST['submit'])) {
 
                 <div class="form-group">
                     <label for="input_dob">
-                        Date Of Birth:
+                        Date Of Birth
                     </label>
                     <input type="date" name="dob" id="input_dob" class="form-control">
 
@@ -234,7 +234,7 @@ if (isset($_POST['submit'])) {
 
                 <div class="form-group">
                     <label for="input_profile_image">
-                        Profile Image:
+                        Profile Image
                     </label>
                     <input type="file" name="profile_image" id="input_profile" class="form-control-file">
 

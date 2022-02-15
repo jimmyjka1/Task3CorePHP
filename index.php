@@ -1,6 +1,7 @@
 <?php 
     session_start();
     require_once "Utilities/helpers.php";
+    $CURRENT_PAGE = "index";
 
     // code to get profile image url 
     if (isset($_SESSION['user_id'])){

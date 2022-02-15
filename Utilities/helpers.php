@@ -1,8 +1,7 @@
 <?php 
     require_once "Database_config/config.php";
-
     $title = "HexaShop";
-    $useHashedPassword = false;
+    $useHashedPassword = true;
     
 
     function executeQuery($pdo, $query, $params){
