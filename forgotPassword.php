@@ -32,7 +32,7 @@ if (isset($_POST['submit'])){
             $res = executeQuery($pdo, $query, $params);
             // ---------code to send mail ---------
             $body = '<p>Hello <br>
-            You can use <a href="https://'.$_SERVER['SERVER_NAME'].'/resetPassword?token='.$token.'">this</a> link to reset your password.<br> If you cannot see this (https://'.$_SERVER['SERVER_NAME'].'/resetPassword?token='.$token.') link, please copy and paste the link in your browser.<br> If you havent requested for password reset, please ignore this mail.
+            You can use <a href="https://'.$_SERVER['SERVER_NAME'].'/resetPassword.php?token='.$token.'">this</a> link to reset your password.<br> If you cannot see this (https://'.$_SERVER['SERVER_NAME'].'/resetPassword.php?token='.$token.') link, please copy and paste the link in your browser.<br> If you havent requested for password reset, please ignore this mail.
             </p>';
             // var_dump($body);
             $header = "From: ".$mail."\r\n";
