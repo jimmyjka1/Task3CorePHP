@@ -31,8 +31,8 @@ if (isset($_POST['submit'])){
         try{
             $res = executeQuery($pdo, $query, $params);
             // ---------code to send mail ---------
-            $body = '<p>
-            You can use <a href="https://'.$_SERVER['SERVER_NAME'].'/resetPassword?token='.$token.'">This</a> link to reset your password. If you havent requested for password reset, please ignore this mail. If you cannot see this (https://'.$_SERVER['SERVER_NAME'].'/resetPassword?token='.$token.') link, please copy and paste the link in your browser.
+            $body = '<p>Hello <br>
+            You can use <a href="https://'.$_SERVER['SERVER_NAME'].'/resetPassword?token='.$token.'">this</a> link to reset your password.<br> If you cannot see this (https://'.$_SERVER['SERVER_NAME'].'/resetPassword?token='.$token.') link, please copy and paste the link in your browser.<br> If you havent requested for password reset, please ignore this mail.
             </p>';
             // var_dump($body);
             $header = "From: ".$mail."\r\n";
@@ -40,11 +40,12 @@ if (isset($_POST['submit'])){
             $header .= "Content-type: text/html\r\n";
             $subject = "Password Reset";
             $res = mail($_POST['email'], $subject, $body, $header);
-            
+
 
             // ------
-            $_SESSION['success'] = "Link to reset password sent to your mail id";
+            $_SESSION['success'] = "Link to reset password sent to<br> your mail id";
             header("Location: forgotPassword.php");
+            die();
         } catch(Exception $e){
             setError("Error: ". $e -> errorInfo[1]);
         }
