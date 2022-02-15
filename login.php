@@ -91,7 +91,7 @@ if (isset($_POST['submit'])){
                     <a href="createUser.php" class="btn btn-info m-1">Create New Account</a>
                 </div>
             </form>
-            <a href="resetPassword.php" class="btn btn-warning my-3">Reset Password</a>
+            <a href="forgotPassword.php" class="btn btn-warning my-3">Forgot Password</a>
         </div>
     </div>
 
@@ -109,6 +109,7 @@ if (isset($_POST['submit'])){
             }
         });
     </script>
+
 </body>
 
 </html>

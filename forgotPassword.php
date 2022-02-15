@@ -5,7 +5,7 @@ session_start();
 function setError($message)
 {
     $_SESSION['error'] = $message;
-    header("Location: login.php");
+    header("Location: forgotPassword.php");
     die();
 }
 
@@ -31,11 +31,20 @@ if (isset($_POST['submit'])){
         try{
             $res = executeQuery($pdo, $query, $params);
             // ---------code to send mail ---------
+            $body = '<p>
+            You can use <a href="https://'.$_SERVER['SERVER_NAME'].'/resetPassword?token='.$token.'">This</a> link to reset your password. If you havent requested for password reset, please ignore this mail. If you cannot see this (https://'.$_SERVER['SERVER_NAME'].'/resetPassword?token='.$token.') link, please copy and paste the link in your browser.
+            </p>';
+            // var_dump($body);
+            $header = "From: ".$mail."\r\n";
+            $header .= "MIME-Version: 1.0\r\n";
+            $header .= "Content-type: text/html\r\n";
+            $subject = "Password Reset";
+            $res = mail($_POST['email'], $subject, $body, $header);
+            
 
             // ------
             $_SESSION['success'] = "Link to reset password sent to your mail id";
-            header("Location: resetPassword.php");
-            die();
+            header("Location: forgotPassword.php");
         } catch(Exception $e){
             setError("Error: ". $e -> errorInfo[1]);
         }
@@ -60,7 +69,7 @@ if (isset($_POST['submit'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password - <?php echo $title ?></title>
+    <title>Forgot Password - <?php echo $title ?></title>
     <link rel="stylesheet" href="Styles/loginStyle.css">
     <?php importBootstrapCSS();
     setFont(); ?>
@@ -69,7 +78,7 @@ if (isset($_POST['submit'])){
 <body>
     <div class="mainContainer d-flex justify-content-center align-items-center p-5">
         <div class="loginContainer d-flex justify-content-center align-items-center px-5 py-3 flex-column">
-            <h1>Reset Password</h1>
+            <h1>Forgot Password</h1>
             <form method="POST" id="loginForm">
                 <div>
                     <label class="error p-0 m-0">
@@ -113,6 +122,8 @@ if (isset($_POST['submit'])){
             }
         });
     </script>
+    
+    
 </body>
 
 </html>

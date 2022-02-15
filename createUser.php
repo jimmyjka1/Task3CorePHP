@@ -97,7 +97,7 @@ if (isset($_POST['submit'])) {
                         ':ln' => $last_name,
                         ':ph' => $phone,
                         ':gn' => $gender,
-                        'dob' => $dob,
+                        ':dob' => $dob,
                         ':url' => $target_file
                     );
 
