@@ -1,8 +1,142 @@
 <?php
 require_once "Utilities/helpers.php";
 session_start();
+// var_dump(date("YmdHis").rand());
+
+function setError($message){
+    $_SESSION['error'] = $message;
+    header("Location: createUser.php");
+    die();
+}
 
 if (isset($_POST['submit'])) {
+    if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email']) && isset($_POST['password_1']) && isset($_POST['password_2']) && isset($_POST['phone']) && isset($_POST['gender']) && isset($_POST['dob']) && (strlen($_POST['first_name']) > 0) && (strlen($_POST['last_name']) > 0) && (strlen($_POST['email']) > 0) && (strlen($_POST['password_1']) > 0) && (strlen($_POST['password_2']) > 0) && (strlen($_POST['phone']) > 0) && (strlen($_POST['gender']) > 0) && (strlen($_POST['dob']) > 0)){
+
+        if (isset($_FILES['profile_image']['name'])){
+
+            if ($_FILES['profile_image']['size'] > 1048576){
+                setError('Profile Image Size should be lesss than 1 MB');
+            }
+
+            $target_dir = "profile_image/".date("YmdHis").rand();
+            $target_file = $target_dir . basename($_FILES['profile_image']['name']);
+            $check = getimagesize($_FILES['profile_image']['tmp_name']);
+            
+            if ($check !== false){
+                if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $target_file)){
+                    
+                    $first_name = $_POST['first_name'];
+                    $last_name = $_POST['last_name'];
+                    $email = $_POST['email'];
+                    $password_1 = $_POST['password_1'];
+                    $password_2 = $_POST['password_2'];
+                    $phone = $_POST['phone'];
+                    $gender = $_POST['gender'];
+                    $dob = $_POST['dob'];
+                    
+                    if ($password_1 !== $password_2){
+                        setError("Passwords not same");
+                    }
+
+                    if (strlen($password_1) < 8){
+                        setError("Password should be atleast 8 characters long");
+                    }
+
+
+                    $regexNumber = "/.*\d.*/";
+                    $regexUpperCaseLetter = "/.*[A-Z].*/";
+                    $regexLowerCaseLetter = "/.*[a-z].*/";
+                    $regexSpecialCharacters = "/.*[\~\`\!\@\#\$\%\^\&\*\(\)\_\-\+\=\|\\\'\"\;\:\?\/\>\.\<\,].*/";
+
+                    if (!preg_match($regexNumber, $password_1)){
+                        setError("Password should have at least one number");
+                    }
+
+                    if (!preg_match($regexUpperCaseLetter, $password_1)){
+                        setError("Password should have at least one Uppercase letter");
+                    }
+
+                    if (!preg_match($regexLowerCaseLetter, $password_1)){
+                        setError("Password should have at least one Lowrcase letter");
+                    }
+
+                    if (!preg_match($regexSpecialCharacters, $password_1)){
+                        setError("Password should have at least one Special Characters");
+                    }
+
+
+                    // sanitizing inputs 
+                    $first_name = htmlspecialchars(strip_tags($first_name));
+                    $last_name = htmlspecialchars(strip_tags($last_name));
+                    $email = htmlspecialchars(strip_tags($email));
+                    $phone = htmlspecialchars(strip_tags($phone));
+                    $gender = htmlspecialchars(strip_tags($gender));
+                    $dob = htmlspecialchars(strip_tags($dob));
+                    $password = hashPassword($password_1);
+
+
+                    if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                        setError('Invalid Email');
+                    } 
+
+                    if (strlen($phone) < 10){
+                        setError('Invalid Phone Number');
+                    }
+
+                    if (!in_array($gender, array('1', '2'))){
+                        setError('Invalid Gender Value');
+                    }
+
+                    
+
+                    $query = "INSERT INTO `User` (email, password, fname, lname, phone, gender, dateOfBirth, profile_image_url) VALUES (:email, :pass ,:fn, :ln, :ph, :gn, :dob, :url)";
+                    $params = array(
+                        ':email' => $email,
+                        ':pass' => $password,
+                        ':fn' => $first_name,
+                        ':ln' => $last_name,
+                        ':ph' => $phone,
+                        ':gn' => $gender,
+                        'dob' => $dob,
+                        ':url' => $target_file
+                    );
+
+                    try{
+                        executeQuery($pdo, $query, $params);
+                    } catch (Exception $e){
+                        // var_dump($e);
+                        if ($e -> errorInfo[0] == '23000'){
+                            setError('Email Id already present.<br> Login or use Forget password option');
+                        }
+                    }
+
+
+                    $_SESSION['success'] = 'User Created Successfully';
+                    
+                    header("Location: login.php");
+                    die();
+                    
+
+
+
+                } else {
+                    setError("Error in Uploading image file");
+                }
+
+
+            } else {
+                setError("Invalid Image File");
+            }
+
+
+
+
+        } else {
+            setError('Profile Image required');
+        }
+    } else {
+        setError("All Fields are required");
+    }
 }
 
 
@@ -25,8 +159,16 @@ if (isset($_POST['submit'])) {
 
 <body>
     <div class="mainContainer d-flex justify-content-center align-items-center p-5">
-        <div class="loginContainer w-75 p-5">
-            <form action="#" method="post" class="" id="createUserForm">
+        <div class="loginContainer p-5">
+            <form action="" method="post" class="" id="createUserForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="error">
+                        <?php if (isset($_SESSION['error'])){ echo $_SESSION['error']; unset($_SESSION['error']);  } ?>
+                    </label><br>
+                    <label class="text-success">
+                        <?php if (isset($_SESSION['success'])){ echo $_SESSION['success']; unset($_SESSION['success']);  } ?>
+                    </label>
+                </div>
                 <div class="form-group">
                     <label for="input_first_name">
                         First Name
@@ -202,7 +344,7 @@ if (isset($_POST['submit'])) {
                     required: "Please Enter Password",
                     minlength: "Password must be at least 8 characters long",
                     maxlength: "Password cannot be more than 128 characters long",
-                    validatePassword: "Password must contain at least one number, one uppercase letter, one lowercase letter, and one special character"
+                    validatePassword: "Password must contain atleast one number,<br> one uppercase letter, one lowercase letter, and one<br> special character"
                 },
                 password_2: {
                     required: "Please Enter Password",

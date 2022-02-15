@@ -1,5 +1,18 @@
 <?php 
     session_start();
+    require_once "Utilities/helpers.php";
+
+    // code to get profile image url 
+    if (isset($_SESSION['user_id'])){
+        $query = "SELECT profile_image_url FROM `User` WHERE id=:id";
+        $params = array(
+            ":id" => $_SESSION['user_id']
+        );
+
+        $result = executeQueryResult($pdo, $query, $params);
+        $profile_url = $result[0]['profile_image_url'];
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -12,16 +25,18 @@
     <link rel="stylesheet" href="Styles/indexStyle.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"> -->
+    <?php importBootstrapCSS(); ?>
 
 
     <title>Shop</title>
 </head>
 
 <body>
-    <?php require_once "Views/navbar.html" ?>
+    <?php require_once "Views/navbar.php" ?>
     <div class="container px-md-5" id="firstContainer">
+    <img scr="images/exploreImages2.jpeg">
         <div class="row mx-md-n5">
             <div class="col-12 col-lg-6 w-100 p-md-2">
                 <div class="" id="firstContainerItems1">
@@ -354,12 +369,13 @@
     </footer>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> -->
+    <?php importBootstrapJS(); ?>
 
 </body>
 

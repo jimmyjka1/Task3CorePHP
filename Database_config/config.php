@@ -1,7 +1,7 @@
 <?php 
     
 
-    $host = 'localhost:3306';
+    $host = 'localhost:3308';
     $username = 'shop';
     $password = 'shop@#1';
     $dbname = 'shopDatabase';

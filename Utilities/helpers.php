@@ -2,6 +2,7 @@
     require_once "Database_config/config.php";
 
     $title = "HexaShop";
+    $useHashedPassword = false;
     
 
     function executeQuery($pdo, $query, $params){
@@ -19,14 +20,18 @@
         if ($rs){
             return $stmt -> fetchAll(PDO::FETCH_ASSOC);
         } else {
-            return $rs;
+            return false;
         }
 
     }
 
     function hashPassword($password){
-        global $salt;
-        return hash('sha256', $salt.$password);
+        global $salt, $useHashedPassword;
+        if ($useHashedPassword){
+            return hash('sha256', $salt.$password);
+        } else {
+            return $password;
+        }
     }
 
 
@@ -50,4 +55,12 @@
             font-family: \'Outfit\', sans-serif;
         }
         </style>';
+    }
+
+
+    function loginRequired(){
+        if (!isset($_SESSION['user_id'])){
+            header("Location: login.php");
+            die();
+        }
     }

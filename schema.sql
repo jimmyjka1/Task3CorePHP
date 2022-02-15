@@ -6,13 +6,14 @@ DROP TABLE IF EXISTS `User`;
 CREATE TABLE `User` (
 	`id` INT PRIMARY KEY AUTO_INCREMENT,
     `email` varchar(128) NOT NULL,
+    `password` VARCHAR(256) NOT NULL,
     `fname` varchar(128) NOT NULL,
     `lname` varchar(128) NOT NULL,
     `phone` varchar(12) NOT NULL,
     `gender` INT NOT NULL,
     `dateOfBirth` DATE NOT NULL,
     `profile_image_url` VARCHAR(128) NOT NULL,
-    INDEX(`email`) USING BTREE
+    UNIQUE INDEX(`email`) USING BTREE
 );
 
 
@@ -22,7 +23,7 @@ BEFORE INSERT ON `User`
 FOR EACH ROW 
 BEGIN 
 	IF NEW.dateOfBirth >= CURDATE() THEN
-    	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Date!';
+    	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Date! Enter Date From Past';
     END IF;
 END$$
 DELIMITER ;
@@ -34,7 +35,7 @@ BEFORE UPDATE ON `User`
 FOR EACH ROW 
 BEGIN 
 	IF NEW.dateOfBirth >= CURDATE() THEN
-    	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Date!';
+    	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Invalid Date! Enter Date From Past';
     END IF;
 END$$
 DELIMITER ;

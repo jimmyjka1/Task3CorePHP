@@ -17,3 +17,7 @@ input.error, select.error {
 label.error {
     color: red;
 }
+
+* {
+    /* outline: 1px solid black; */
+}
