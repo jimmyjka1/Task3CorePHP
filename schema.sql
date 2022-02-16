@@ -11,7 +11,7 @@ CREATE TABLE `User` (
     `lname` varchar(128) NOT NULL,
     `phone` varchar(12) NOT NULL,
     `gender` INT NOT NULL,
-    `dateOfBirth` DATE NOT NULL,
+    `date_of_birth` DATE NOT NULL,
     `profile_image_url` VARCHAR(128) NOT NULL,
     UNIQUE INDEX(`email`) USING BTREE
 );

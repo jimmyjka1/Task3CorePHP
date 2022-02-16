@@ -122,7 +122,7 @@ if (isset($_POST['submit'])) {
     <?php require_once "Views/navbar.php" ?>
 
 
-    <div class="editProfileContainer d-flex justify-content-center align-items-center flex-column">
+    <div class="editProfileContainer pt-5 d-flex justify-content-center align-items-center flex-column">
         <h1 class="mb-5">Change Password</h1>
         <div class="formContainer mb-5">
             <span class="text-danger">
@@ -170,7 +170,7 @@ if (isset($_POST['submit'])) {
         </div>
 
 
-        <?php importBootstrapJS(); ?>
+        <?php require_once "Views/footer.php";importBootstrapJS(); ?>
         <script>
             jQuery.validator.addMethod('validatePassword', function(value, element, params) {
                 password_1Value = element.value;

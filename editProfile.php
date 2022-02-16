@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
                     if (executeQuery($pdo, $query, $params)) {
                         $_SESSION['success'] = "Profile Image Update Successfully";
                         header("Location: editProfile.php");
-                        die();
+                        die();  
                     } else {
                         setError("Error in updating profile image");
                     }
@@ -75,15 +75,15 @@ if (isset($_POST['submit'])) {
             $gender = htmlspecialchars(strip_tags($gender));
             $dob = htmlspecialchars(strip_tags($dob));
 
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 setError('Invalid Email');
-            } 
+            }
 
-            if (strlen($phone) < 10){
+            if (strlen($phone) < 10) {
                 setError('Invalid Phone Number');
             }
 
-            if (!in_array($gender, array('1', '2'))){
+            if (!in_array($gender, array('1', '2'))) {
                 setError('Invalid Gender Value');
             }
 
@@ -98,17 +98,17 @@ if (isset($_POST['submit'])) {
                 ':dob' => $dob,
                 ':id' => $_SESSION['user_id']
             );
-            
-            try{
+
+            try {
                 $res = executeQuery($pdo, $query, $params);
-            } catch (Exception $e){
+            } catch (Exception $e) {
                 // var_dump($e);
-                if ($e -> errorInfo[0] == '23000'){
+                if ($e->errorInfo[0] == '23000') {
                     setError('Email ID already present');
                 }
             }
 
-            if ($res){
+            if ($res) {
                 $_SESSION['fname'] = $first_name;
                 $_SESSION['lname'] = $last_name;
                 $_SESSION['email'] = $email;
@@ -147,100 +147,105 @@ if (isset($_POST['submit'])) {
     <?php require_once "Views/navbar.php" ?>
 
 
-    <div class="editProfileContainer d-flex justify-content-center align-items-center flex-column">
-        <h1 class="mb-5">Edit Profile</h1>
-        <img src="<?php echo $profile_url ?>" alt="" id="editProfileImage">
-        <form class="my-3 d-flex justify-content-center align-items-center flex-column" action="editProfile.php" method="POST" id="changeProfileImageForm" enctype="multipart/form-data">
-            <div class="form-group">
-                <input type="file" name="profile_image" id="input_file" class="form-control-file">
-            </div>
-            <button class="btn btn-secondary" type="submit" name="submit" value="profile_change">Change</button>
-        </form>
-        <span class="text-danger">
-            <?php
-            if (isset($_SESSION['error'])) {
-                echo $_SESSION['error'];
-                unset($_SESSION['error']);
-            }
-
-            ?>
-        </span>
-        <span class="text-success">
-            <?php
-            if (isset($_SESSION['success'])) {
-                echo $_SESSION['success'];
-                unset($_SESSION['success']);
-            }
-
-            ?>
-        </span>
-        <div class="formContainer mb-5">
-            <form action="editProfile.php" method="post" id="editUserForm">
+    <div class="editProfileContainer row p-5 w-100">
+        <div class="col-12 col-lg-4 d-flex justify-content-start align-items-center flex-column">
+            <h1 class="mb-5">Edit Profile</h1>
+            <img src="<?php echo $profile_url ?>" alt="" id="editProfileImage">
+            <form class="my-3 d-flex justify-content-center align-items-center flex-column" action="editProfile.php" method="POST" id="changeProfileImageForm" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="input_first_name">
-                        First Name
-                    </label>
-                    <input type="text" class="form-control" name="first_name" id="input_first_name" value="<?php echo $result['fname'] ?>">
-
+                    <input type="file" name="profile_image" id="input_file" class="form-control-file">
                 </div>
-                <div class="form-group">
-                    <label for="input_last_name">
-                        Last Name
-                    </label>
-                    <input type="text" class="form-control" name="last_name" id="input_last_name" value="<?php echo $result['lname'] ?>">
-
-                </div>
-                <div class="form-group">
-                    <label for="input_email">
-                        Email
-                    </label>
-                    <input type="email" class="form-control" name="email" id="input_email" value="<?php echo $result['email'] ?>">
-
-                </div>
-                <div class="form-group">
-                    <label for="input_phone">
-                        Enter Phone Number
-                    </label>
-                    <input type="tel" name="phone" id="input_phone" class="form-control" value="<?php echo $result['phone'] ?>">
-
-                </div>
-
-                <div class="form-group">
-                    <label for="input_gender">
-                        Select Gender
-                    </label>
-                    <select name="gender" id="input_gender" class="custom-select">
-                        <option value="">Select Gender</option>
-                        <option value="1" <?php if ($result['gender'] == 1) {
-                                                echo 'selected';
-                                            } ?>>Female</option>
-                        <option value="2" <?php if ($result['gender'] == 2) {
-                                                echo 'selected';
-                                            } ?>>Male</option>
-                    </select>
-
-                </div>
-
-                <div class="form-group">
-                    <label for="input_dob">
-                        Date Of Birth
-                    </label>
-                    <input type="date" name="dob" id="input_dob" class="form-control" value="<?php echo $result['date_of_birth']; ?>" max="<?php echo date('Y-m-d'); ?>">
-
-                </div>
-
-                <div class="submitButtonContainer d-flex justify-content-center align-items-center">
-                    <button type="submit" name="submit" class="btn btn-primary" value="update_details">Submit</button>
-                </div>
-
-
+                <button class="btn btn-secondary" type="submit" name="submit" value="profile_change">Change</button>
             </form>
+        </div>
+        <div class="col-12 col-md-8">
+            <span class="text-danger">
+                <?php
+                if (isset($_SESSION['error'])) {
+                    echo $_SESSION['error'];
+                    unset($_SESSION['error']);
+                }
+
+                ?>
+            </span>
+            <span class="text-success">
+                <?php
+                if (isset($_SESSION['success'])) {
+                    echo $_SESSION['success'];
+                    unset($_SESSION['success']);
+                }
+
+                ?>
+            </span>
+            <div class="formContainer mb-5">
+                <form action="editProfile.php" method="post" id="editUserForm">
+                    <div class="form-group">
+                        <label for="input_first_name">
+                            First Name
+                        </label>
+                        <input type="text" class="form-control" name="first_name" id="input_first_name" value="<?php echo $result['fname'] ?>">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="input_last_name">
+                            Last Name
+                        </label>
+                        <input type="text" class="form-control" name="last_name" id="input_last_name" value="<?php echo $result['lname'] ?>">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="input_email">
+                            Email
+                        </label>
+                        <input type="email" class="form-control" name="email" id="input_email" value="<?php echo $result['email'] ?>">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="input_phone">
+                            Enter Phone Number
+                        </label>
+                        <input type="tel" name="phone" id="input_phone" class="form-control" value="<?php echo $result['phone'] ?>">
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input_gender">
+                            Select Gender
+                        </label>
+                        <select name="gender" id="input_gender" class="custom-select">
+                            <option value="">Select Gender</option>
+                            <option value="1" <?php if ($result['gender'] == 1) {
+                                                    echo 'selected';
+                                                } ?>>Female</option>
+                            <option value="2" <?php if ($result['gender'] == 2) {
+                                                    echo 'selected';
+                                                } ?>>Male</option>
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input_dob">
+                            Date Of Birth
+                        </label>
+                        <input type="date" name="dob" id="input_dob" class="form-control" value="<?php echo $result['date_of_birth']; ?>" max="<?php echo date('Y-m-d'); ?>">
+
+                    </div>
+
+                    <div class="submitButtonContainer d-flex justify-content-center align-items-center">
+                        <button type="submit" name="submit" class="btn btn-primary" value="update_details">Submit</button>
+                    </div>
+
+
+                </form>
+            </div>
         </div>
     </div>
 
 
 
-    <?php require_once "Views/footer.php";importBootstrapJS(); ?>
+    <?php require_once "Views/footer.php";
+    importBootstrapJS(); ?>
     <script>
         jQuery.validator.addMethod('validateDate', function(value, element, params) {
             dt = new Date(value);
@@ -320,8 +325,6 @@ if (isset($_POST['submit'])) {
                 }
             });
         });
-
-
     </script>
 </body>
 
