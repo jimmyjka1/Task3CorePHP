@@ -102,7 +102,7 @@ if (isset($_POST['submit'])) {
                     );
 
                     try{
-                        executeQuery($pdo, $query, $params);
+                        $res = executeQuery($pdo, $query, $params);
                     } catch (Exception $e){
                         if ($e -> errorInfo[0] == '23000'){
                             setError('Email Id already present.<br> Login or use Forget password option');
@@ -111,11 +111,14 @@ if (isset($_POST['submit'])) {
                         }
                     }
 
-
-                    $_SESSION['success'] = 'User Created Successfully';
+                    if ($res){
+                        $_SESSION['success'] = 'User Created Successfully';
+                        header("Location: login.php");
+                        die();
+                    } else {
+                        setError('User Creation Failed. Email Id already present.<br> Login or use Forget password option');
+                    }
                     
-                    header("Location: login.php");
-                    die();
                     
 
 
