@@ -104,9 +104,10 @@ if (isset($_POST['submit'])) {
                     try{
                         executeQuery($pdo, $query, $params);
                     } catch (Exception $e){
-                        // var_dump($e);
                         if ($e -> errorInfo[0] == '23000'){
                             setError('Email Id already present.<br> Login or use Forget password option');
+                        } else {
+                            setError($e -> errorInfo[2]);
                         }
                     }
 
