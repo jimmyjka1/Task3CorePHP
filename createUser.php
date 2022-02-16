@@ -89,7 +89,7 @@ if (isset($_POST['submit'])) {
 
                     
 
-                    $query = "INSERT INTO `User` (email, password, fname, lname, phone, gender, dateOfBirth, profile_image_url) VALUES (:email, :pass ,:fn, :ln, :ph, :gn, :dob, :url)";
+                    $query = "INSERT INTO `User` (email, password, fname, lname, phone, gender, date_of_birth, profile_image_url) VALUES (:email, :pass ,:fn, :ln, :ph, :gn, :dob, :url)";
                     $params = array(
                         ':email' => $email,
                         ':pass' => $password,
@@ -162,6 +162,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
+    <?php require_once "Views/navbar.php" ?>
     <div class="mainContainer d-flex justify-content-center align-items-center p-5">
         <div class="loginContainer p-5">
             <form action="" method="post" class="" id="createUserForm" enctype="multipart/form-data">
@@ -232,7 +233,7 @@ if (isset($_POST['submit'])) {
                     <label for="input_dob">
                         Date Of Birth
                     </label>
-                    <input type="date" name="dob" id="input_dob" class="form-control">
+                    <input type="date" name="dob" id="input_dob" class="form-control" max="<?php echo date("Y-m-d")  ?>">
 
                 </div>
 
@@ -254,7 +255,7 @@ if (isset($_POST['submit'])) {
 
     </div>
 
-    <?php importBootstrapJS() ?>
+    <?php require_once "Views/footer.php"; importBootstrapJS() ?>
 
     <script>
         jQuery.validator.addMethod('validatePassword', function(value, element, params) {

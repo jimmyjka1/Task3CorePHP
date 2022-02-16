@@ -88,7 +88,7 @@ if (isset($_POST['submit'])) {
             }
 
 
-            $query = "UPDATE `User` SET email=:em, fname=:fname, lname=:lname, phone=:phone, gender=:gen, dateOfBirth=:dob WHERE id=:id";
+            $query = "UPDATE `User` SET email=:em, fname=:fname, lname=:lname, phone=:phone, gender=:gen, date_of_birth=:dob WHERE id=:id";
             $params = array(
                 ':em' => $email,
                 ':fname' => $first_name,
@@ -225,7 +225,7 @@ if (isset($_POST['submit'])) {
                     <label for="input_dob">
                         Date Of Birth
                     </label>
-                    <input type="date" name="dob" id="input_dob" class="form-control" value="<?php echo $result['dateOfBirth']; ?>">
+                    <input type="date" name="dob" id="input_dob" class="form-control" value="<?php echo $result['date_of_birth']; ?>" max="<?php echo date('Y-m-d'); ?>">
 
                 </div>
 
@@ -240,7 +240,7 @@ if (isset($_POST['submit'])) {
 
 
 
-    <?php importBootstrapJS(); ?>
+    <?php require_once "Views/footer.php";importBootstrapJS(); ?>
     <script>
         jQuery.validator.addMethod('validateDate', function(value, element, params) {
             dt = new Date(value);

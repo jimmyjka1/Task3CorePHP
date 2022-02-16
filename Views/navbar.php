@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="Views/navbarStyle.css">
 <nav class="navbar navbar-light navbar-expand-lg text-dark position-fixed">
     <a href="#" class="navbar-brand mx-3"><img class="h-10" id="logo" src="images/logo.png" alt="Hexa Logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapsing">

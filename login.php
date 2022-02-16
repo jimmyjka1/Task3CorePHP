@@ -54,6 +54,7 @@ if (isset($_POST['submit'])){
 </head>
 
 <body>
+    <?php require_once "Views/navbar.php"; ?>
     <div class="mainContainer d-flex justify-content-center align-items-center p-5">
         <div class="loginContainer d-flex justify-content-center align-items-center px-5 py-3 flex-column">
             <h1>Login</h1>
@@ -88,14 +89,16 @@ if (isset($_POST['submit'])){
                     <button class="btn btn-primary m-1" type="submit" name="submit">
                         Login
                     </button>
-                    <a href="createUser.php" class="btn btn-info m-1">Create New Account</a>
+                    <a href="forgotPassword.php" class="my-3">Forgot Password</a>
                 </div>
             </form>
-            <a href="forgotPassword.php" class="btn btn-warning my-3">Forgot Password</a>
+            
+            <a href="createUser.php" class="btn btn-info m-1">Create New Account</a>
+
         </div>
     </div>
 
-    <?php importBootstrapJS(); ?>
+    <?php require_once "Views/footer.php";importBootstrapJS(); ?>
 
     <script>
         $('#loginForm').validate({

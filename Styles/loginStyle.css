@@ -3,6 +3,10 @@
     padding: 5px 10px;
 } */
 
+.mainContainer {
+    margin-top: 10vh;
+}
+
 .loginContainer {
     /* border: 1px solid black; */
     border-radius: 10px;
@@ -17,6 +21,9 @@ input.error, select.error {
 label.error {
     color: red;
 }
+
+
+
 
 * {
     /* outline: 1px solid black; */

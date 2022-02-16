@@ -77,6 +77,7 @@ if (isset($_POST['submit'])){
 </head>
 
 <body>
+    <?php require_once "Views/navbar.php" ?>
     <div class="mainContainer d-flex justify-content-center align-items-center p-5">
         <div class="loginContainer d-flex justify-content-center align-items-center px-5 py-3 flex-column">
             <h1>Forgot Password</h1>
@@ -112,7 +113,7 @@ if (isset($_POST['submit'])){
         </div>
     </div>
 
-    <?php importBootstrapJS(); ?>
+    <?php require_once "Views/footer.php";importBootstrapJS(); ?>
 
     <script>
         $('#loginForm').validate({

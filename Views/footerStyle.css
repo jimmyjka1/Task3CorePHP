@@ -1,0 +1,41 @@
+footer {
+    width: 100%;
+    background-color: black;
+    padding: 8vh 0 0 0;
+    color: rgb(219, 219, 219);
+}
+
+#userfulLinks {
+    margin: 1vh 14.5vw 1vh 14.5vw;
+}
+
+.userFulLinksItem {
+    width: 100%;
+    height: 100%;
+    padding: 0 1vw;
+}
+
+#footerLogo {
+    width: 100%;
+    border-radius: 3px;
+}
+
+footer a {
+    text-decoration: none;
+    color: inherit;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+#sep {
+    height: 1px;
+    margin: 0 14.5vw 2vh 14.5vw;
+    background-color: rgba(255, 255, 255, 0.541);
+}
+
+.copyrightSocialMediaIcons i {
+    margin: 1vh 1vw;
+    cursor: pointer;
+}

@@ -1,0 +1,40 @@
+
+#profile_image {
+    width: 30px !important;
+    height: 30px !important;
+    
+    border-radius: 50%;
+}
+body {
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+input,button {
+    font-family: 'Outfit', sans-serif;
+}
+
+nav {
+    top: 0;
+    width: 100vw;
+    background-color: white;
+    z-index: 2000;
+    
+}
+
+nav img#logo {
+    height: 6vh;
+    display: inline-block;
+}
+
+#navbarCollapsing {
+    color: black !important;
+}
+
+
+li.nav-item a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    font-weight: bold;
+}
