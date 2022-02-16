@@ -1,19 +1,62 @@
-<?php 
-    session_start();
-    require_once "Utilities/helpers.php";
-    $CURRENT_PAGE = "index";
+<?php
+session_start();
+require_once "Utilities/helpers.php";
+$CURRENT_PAGE = "index";
 
-    // code to get profile image url 
-    if (isset($_SESSION['user_id'])){
-        $query = "SELECT profile_image_url FROM `User` WHERE id=:id";
-        $params = array(
-            ":id" => $_SESSION['user_id']
-        );
+// code to get profile image url 
+if (isset($_SESSION['user_id'])) {
+    $query = "SELECT profile_image_url FROM `User` WHERE id=:id";
+    $params = array(
+        ":id" => $_SESSION['user_id']
+    );
 
-        $result = executeQueryResult($pdo, $query, $params);
-        $profile_url = $result[0]['profile_image_url'];
-    }
+    $result = executeQueryResult($pdo, $query, $params);
+    $profile_url = $result[0]['profile_image_url'];
 
+
+    $query = "SELECT p.id, p.name, p.price, p.category_id, p.image_url, p.quantity, c.user_id FROM Product as p LEFT JOIN Cart as c ON (c.product_id = p.id AND (c.user_id = :id OR c.user_id IS NULL)) WHERE p.category_id = 1 ORDER BY p.id DESC LIMIT 3; ";
+    $params = array(
+        ":id" => $_SESSION['user_id']
+    );
+    $mens_products = executeQueryResult($pdo, $query, $params);
+    // code to get top 3 womens products
+    $query = "SELECT p.id, p.name, p.price, p.category_id, p.image_url, p.quantity, c.user_id FROM Product as p LEFT JOIN Cart as c ON (c.product_id = p.id AND (c.user_id = :id OR c.user_id IS NULL)) WHERE p.category_id = 2 ORDER BY p.id DESC LIMIT 3; ";
+    $params = array(
+        ":id" => $_SESSION['user_id']
+    );
+    $womens_products = executeQueryResult($pdo, $query, $params);
+
+    // code to get top 3 kids products
+    $query = "SELECT p.id, p.name, p.price, p.category_id, p.image_url, p.quantity, c.user_id FROM Product as p LEFT JOIN Cart as c ON (c.product_id = p.id AND (c.user_id = :id OR c.user_id IS NULL)) WHERE p.category_id = 3 ORDER BY p.id DESC LIMIT 3; ";
+    $params = array(
+        ":id" => $_SESSION['user_id']
+    );
+    $kids_products = executeQueryResult($pdo, $query, $params);
+} else {
+    // top 3 mens products 
+    $query = "SELECT * FROM Product WHERE category_id = 1 ORDER BY id DESC LIMIT 3; ";
+    $params = array();
+    $mens_products = executeQueryResult($pdo, $query, $params);
+
+    // top 3 womens products
+    $query = "SELECT * FROM Product WHERE category_id = 2 ORDER BY id DESC LIMIT 3; ";
+    $params = array();
+    $womens_products = executeQueryResult($pdo, $query, $params);
+
+
+    // top 3 kids products
+    $query = "SELECT * FROM Product WHERE category_id = 3 ORDER BY id DESC LIMIT 3; ";
+    $params = array();
+    $kids_products = executeQueryResult($pdo, $query, $params);
+    
+
+
+}
+
+
+// code to get top 3 mens products
+
+// var_dump($mens_products);
 ?>
 
 <!DOCTYPE html>
@@ -37,12 +80,11 @@
 <body>
     <?php require_once "Views/navbar.php" ?>
     <div class="container px-md-5" id="firstContainer">
-    <img scr="images/exploreImages2.jpeg">
+        <img scr="images/exploreImages2.jpeg">
         <div class="row mx-md-n5">
             <div class="col-12 col-lg-6 w-100 p-md-2">
                 <div class="" id="firstContainerItems1">
-                    <div class="firstContainerDataItem w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white"
-                        id="firstDataItem1">
+                    <div class="firstContainerDataItem w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white" id="firstDataItem1">
                         <div id="flCont">
                             <span class="largeText">We are Hexashop</span>
                             <p class="itallic">Aewsome, clean & creative HTML5 template</p>
@@ -56,8 +98,7 @@
                 <div class="row">
                     <div class="col-12 col-lg-6 p-md-2">
                         <div class="" id="firstContainerItems2">
-                            <div class="firstContainerDataItem w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white"
-                                id="firstDataItem2">
+                            <div class="firstContainerDataItem w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white" id="firstDataItem2">
                                 <span class="mediumText">Women</span>
                                 <p class="itallic">Best Clothes for Women</p>
                             </div>
@@ -65,8 +106,7 @@
                     </div>
                     <div class="col-12 col-lg-6 p-md-2">
                         <div class="" id="firstContainerItems3">
-                            <div class="firstContainerDataItem w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white"
-                                id="firstDataItem3">
+                            <div class="firstContainerDataItem w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white" id="firstDataItem3">
                                 <span class="mediumText">Men</span>
                                 <p class="itallic">Best Clothes for Men</p>
                             </div>
@@ -76,8 +116,7 @@
                 <div class="row">
                     <div class="col-12 col-lg-6 p-md-2">
                         <div class="" id="firstContainerItems4">
-                            <div class="firstContainerDataItem w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white"
-                                id="firstDataItem4">
+                            <div class="firstContainerDataItem w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white" id="firstDataItem4">
                                 <span class="mediumText">Kids</span>
                                 <p class="itallic">Best Clothes for Kids</p>
                             </div>
@@ -85,8 +124,7 @@
                     </div>
                     <div class="col-12 col-lg-6 p-md-2">
                         <div class="" id="firstContainerItems5">
-                            <div class="firstContainerDataItem w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white"
-                                id="firstDataItem5">
+                            <div class="firstContainerDataItem w-100 h-100 d-flex flex-column justify-content-center align-items-center text-white" id="firstDataItem5">
                                 <span class="mediumText">Accessories</span>
                                 <p class="itallic">Best Trend Accessories</p>
                             </div>
@@ -111,27 +149,13 @@
                 Details to details is what makes Hexashop different from the other themes
             </p>
             <div class="imageListContainer row mx-auto">
-                <div class="imageListItem col-12 col-md-4 pt-3">
-                    <img class="" src="images/mensImage1.jpg" alt="mens1">
-                    <p class="m-0 mb-lg-2 d-lg-inline-block mt-lg-2">Classic Spin</p>
-                    <i
-                        class="material-icons stars m-0 float-lg-right mt-lg-2">&#xe838;&#xe838;&#xe838;&#xe838;&#xe838;</i><br>
-                    <span class="color-grey price m-0">$200.00</span>
-                </div>
-                <div class="imageListItem col-12 col-md-4 pt-3">
-                    <img src="images/mensImage2.jpg" alt="mens1">
-                    <p class="m-0 mb-lg-2 d-lg-inline-block mt-lg-2">AirForce 1 X</p>
-                    <i
-                        class="material-icons stars m-0 float-lg-right mt-lg-2">&#xe838;&#xe838;&#xe838;&#xe838;&#xe838;</i><br>
-                    <span class="color-grey price m-0">$202.00</span>
-                </div>
-                <div class="imageListItem col-12 col-md-4 pt-3">
-                    <img src="images/mensImage3.jpg" alt="mens1">
-                    <p class="m-0 mb-lg-2 d-lg-inline-block mt-lg-2">Love Nana 20</p>
-                    <i
-                        class="material-icons stars m-0 float-lg-right mt-lg-2">&#xe838;&#xe838;&#xe838;&#xe838;&#xe838;</i><br>
-                    <span class="color-grey price m-0">$2000.00</span>
-                </div>
+                <?php
+                foreach ($mens_products as $product) {
+                    require "Views/productTile.php";
+                }
+
+                ?>
+
 
             </div>
         </div>
@@ -150,28 +174,12 @@
                 Details to details is what makes Hexashop different from the other themes
             </p>
             <div class="imageListContainer row mx-auto">
-                <div class="imageListItem col-12 col-md-4 pt-3">
-                    <img src="images/womensImage1.jpg" alt="mens1">
-                    <p class="m-0 mb-lg-2 d-lg-inline-block mt-lg-2">New Green Jacket</p>
-                    <i
-                        class="material-icons stars m-0 float-lg-right mt-lg-2">&#xe838;&#xe838;&#xe838;&#xe838;&#xe838;</i><br>
-                    <span class="color-grey price m-0">$200.00</span>
-                </div>
-                <div class="imageListItem col-12 col-md-4 pt-3">
-                    <img src="images/womensImage2.jpg" alt="mens1">
-                    <p class="m-0 mb-lg-2 d-lg-inline-block mt-lg-2">Classic Dress</p>
-                    <i
-                        class="material-icons stars m-0 float-lg-right mt-lg-2">&#xe838;&#xe838;&#xe838;&#xe838;&#xe838;</i><br>
-                    <span class="color-grey price m-0">$202.00</span>
-                </div>
-                <div class="imageListItem col-12 col-md-4 pt-3">
-                    <img src="images/womensImage3.jpg" alt="mens1">
-                    <p class="m-0 mb-lg-2 d-lg-inline-block mt-lg-2">Spring Collection</p>
-                    <i
-                        class="material-icons stars m-0 float-lg-right mt-lg-2">&#xe838;&#xe838;&#xe838;&#xe838;&#xe838;</i><br>
-                    <span class="color-grey price m-0">$2000.00</span>
-                </div>
+                <?php
+                foreach ($womens_products as $product) {
+                    require "Views/productTile.php";
+                }
 
+                ?>
             </div>
         </div>
         <div class="arrow3 d-none d-md-flex justify-content-center align-items-center" id="menarrow3">
@@ -191,28 +199,12 @@
                 Details to details is what makes Hexashop different from the other themes
             </p>
             <div class="imageListContainer row mx-auto">
-                <div class="imageListItem col-12 col-md-4 pt-3">
-                    <img src="images/kidsImages1.jpg" alt="mens1">
-                    <p class="m-0 mb-lg-2 d-lg-inline-block mt-lg-2">School Collection</p>
-                    <i
-                        class="material-icons stars m-0 float-lg-right mt-lg-2">&#xe838;&#xe838;&#xe838;&#xe838;&#xe838;</i><br>
-                    <span class="color-grey price m-0">$200.00</span>
-                </div>
-                <div class="imageListItem col-12 col-md-4 pt-3">
-                    <img src="images/kidsImages2.jpg" alt="mens1">
-                    <p class="m-0 mb-lg-2 d-lg-inline-block mt-lg-2">Summer Camp</p>
-                    <i
-                        class="material-icons stars m-0 float-lg-right mt-lg-2">&#xe838;&#xe838;&#xe838;&#xe838;&#xe838;</i><br>
-                    <span class="color-grey price m-0">$202.00</span>
-                </div>
-                <div class="imageListItem col-12 col-md-4 pt-3">
-                    <img src="images/kidsImages3.jpg" alt="mens1">
-                    <p class="m-0 mb-lg-2 d-lg-inline-block mt-lg-2">Classic Kid</p>
-                    <i
-                        class="material-icons stars m-0 float-lg-right mt-lg-2">&#xe838;&#xe838;&#xe838;&#xe838;&#xe838;</i><br>
-                    <span class="color-grey price m-0">$2000.00</span>
-                </div>
+                <?php
+                foreach ($kids_products as $product) {
+                    require "Views/productTile.php";
+                }
 
+                ?>
             </div>
         </div>
         <div class="arrow3 d-none d-md-flex justify-content-center align-items-center" id="menarrow3">
@@ -333,8 +325,52 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
         crossorigin="anonymous"></script> -->
-    
-    <?php require_once "Views/footer.php";importBootstrapJS(); ?>
+
+    <?php require_once "Views/footer.php";
+    importBootstrapJS(); ?>
+
+    <script>
+        $(document).ready(function() {
+            $(".cart-button").click(function(e) {
+                $element = $(this);
+                $id = $element.attr("data-id");
+                if ($element.hasClass("added")) {
+                    $.ajax({
+                        url: "toCart.php",
+                        method: "POST",
+                        data: {
+                            action: "remove",
+                            product_id: $id
+                        },
+                        success: function(response) {
+                            // if (response == "success") {
+                            $element.removeClass("added");
+                            $element.html("&#xe854;");
+                            console.log(response);
+                            // }
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        url: "toCart.php",
+                        method: "POST",
+                        data: {
+                            action: "add",
+                            product_id: $id
+                        },
+                        success: function(response) {
+                            // if (response == "success") {
+                            $element.addClass("added");
+                            $element.html("&#xe928;");
+                            console.log(response);
+                            // }
+                        }
+                    });
+                }
+
+            });
+        });
+    </script>
 
 </body>
 

@@ -112,6 +112,8 @@ if (isset($_POST['submit'])) {
                 $_SESSION['fname'] = $first_name;
                 $_SESSION['lname'] = $last_name;
                 $_SESSION['email'] = $email;
+
+                $_SESSION['success'] = "Profile Updated Successfully";
                 header("Location: editProfile.php");
                 die();
             } else {

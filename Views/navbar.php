@@ -24,8 +24,10 @@
                             '.$_SESSION['fname']." ".$_SESSION['lname'].'
                         </a>
                         <div class="dropdown-menu">
+                            <a href="myCart.php" class="dropdown-item">My Cart</a>
                             <a href="editProfile.php" class="dropdown-item">Edit Profile</a>
                             <a href="changePassword.php" class="dropdown-item">Change Password</a>
+                            <div class="dropdown-divider"></div>
                             <a href="logout.php" class="dropdown-item">Logout</a>
                         </div>
                         </div>';
