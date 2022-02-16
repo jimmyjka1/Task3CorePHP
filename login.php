@@ -86,7 +86,7 @@ if (isset($_POST['submit'])){
                 </div>
                 <div class="buttonContainer d-flex justify-content-center align-items-center flex-wrap">
                     <button class="btn btn-primary m-1" type="submit" name="submit">
-                        Submit
+                        Login
                     </button>
                     <a href="createUser.php" class="btn btn-info m-1">Create New Account</a>
                 </div>

@@ -105,6 +105,7 @@ if (isset($_POST['submit'])){
                     <button class="btn btn-primary m-1" type="submit" name="submit" value="submit">
                         Send Reset Link
                     </button>
+                    <a href="login.php" class="btn btn-info m-1">Cancel</a>
                 </div>
             </form>
             
