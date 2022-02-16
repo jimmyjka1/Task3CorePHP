@@ -2,3 +2,4 @@
 deployment
   tasks: 
     - export DEPLOYPATH=/home/jimmykin/task3
+    - /bin/cp * $DEPLOYPATH
