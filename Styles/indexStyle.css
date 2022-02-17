@@ -105,7 +105,7 @@ html, body {
 }
 
 .mensContainerCart {
-    margin: 20vh 14vw 5vh 14vw;
+    margin: 20vh 14vw 5vh 14vw !important;
 }
 
     
@@ -392,3 +392,102 @@ label.error {
 .formContainer {
     min-width: 50vw;
 }
+
+
+/* my cart */
+.myCartProductItem {
+    /* height: 24vh; */
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color: rgba(128, 128, 128, 0.377);
+    /* border-radius: 20px; */
+    border-collapse: collapse;
+    margin-top: -1px;
+    transition: all 0.1s;
+}
+
+
+.myCartProductItem:hover {
+    background-color: rgba(128, 128, 128, 0.247);
+    box-shadow: 0 0 10px rgba(128, 128, 128, 0.822);
+    outline: 1px solid rgba(128, 128, 128, 0.377);
+    /* border: none; */
+}
+
+
+.mycartProductImage {
+    max-width: 14vh;
+    height: 18vh;
+    border-radius: 5px;
+
+}
+
+.cartProductIcon {
+    height: 20vh;
+}
+
+.cartProductQuantity input {
+    width: 2vw;
+    min-width: 30px;
+    border: none;
+    outline: none;
+    text-align: center;
+}
+
+.cartProductQuantityInputContainer {
+    border: 1px solid rgba(128, 128, 128, 0.521);
+}
+
+
+
+.cartQuantityChangeButtons {
+    background-color: white;
+    outline: none;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: all 0.3s;
+}
+
+.cartQuantityChangeButtons:hover {
+    background-color: rgba(128, 128, 128, 0.342);
+}
+
+
+.cartQuantityChangeButtons:active {
+    background-color: black;
+    color: white;
+}
+
+.cartHeadingContainer h5 {
+    font-size: 1.2vw;
+}
+
+.cartLowQuantityWarning {
+     border: 1px solid red;
+     color: red;
+     border-radius: 4px;
+}
+
+
+.cartOutOfStockWarning {
+    border: 1px solid red;
+    color: white;
+    background-color: red;
+    border-radius: 4px;
+}
+
+#cartFinalCheckoutTable table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#cartFinalCheckoutTable table td, th {
+    padding: 1vh;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color: grey;
+}
+
+

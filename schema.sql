@@ -75,6 +75,8 @@ CREATE TABLE `Cart`(
     `id` INT PRIMARY KEY AUTO_INCREMENT,
     `user_id` INT NOT NULL,
     `product_id` INT NOT NULL,
+    `quantity` INT NOT NULL DEFAULT 1,
+    `description` VARCHAR(256) DEFAULT "Product Description not found",
     CONSTRAINT fk_cart_user FOREIGN KEY (`user_id`) REFERENCES `User`(`id`),
     CONSTRAINT fk_cart_product FOREIGN KEY (`product_id`) REFERENCES `Product`(`id`)
 );
@@ -86,17 +88,17 @@ INSERT INTO `ProductCategories` (`name`) VALUES ('Men'), ('Women'), ('Female');
 
 -- insert dummy data to Product 
 INSERT INTO `Product` (`name`, `price`, `category_id`, `image_url`, `quantity`) VALUES
-    ('Classic Spin', 200, 1, 'images/mensImage1.jpg', 1),
-    ('Air Force 1 X', 202, 1, 'images/mensImage2.jpg', 1),
-    ('Love Nana 20', 200, 1, 'images/mensImage3.jpg', 1),
+    ('Classic Spin', 200, 1, 'images/mensImage1.jpg', 10),
+    ('Air Force 1 X', 202, 1, 'images/mensImage2.jpg', 10),
+    ('Love Nana 20', 200, 1, 'images/mensImage3.jpg', 10),
     
-    ('New Green Jacket', 200, 2, 'images/womensImage1.jpg', 1),
-    ('Classic Dress', 202, 2, 'images/womensImage2.jpg', 1),
-    ('Spring Collection', 2000, 2, 'images/womensImage3.jpg', 1),
+    ('New Green Jacket', 200, 2, 'images/womensImage1.jpg', 10),
+    ('Classic Dress', 202, 2, 'images/womensImage2.jpg', 10),
+    ('Spring Collection', 2000, 2, 'images/womensImage3.jpg', 10),
     
-    ('School Collection', 200, 3, 'images/kidsImages1.jpg', 1),
-    ('Summer Camp', 202, 3, 'images/kidsImages2.jpg', 1),
-    ('Love Nana 20', 200, 3, 'images/kidsImages3.jpg', 1);
+    ('School Collection', 200, 3, 'images/kidsImages1.jpg', 10),
+    ('Summer Camp', 202, 3, 'images/kidsImages2.jpg', 10),
+    ('Love Nana 20', 200, 3, 'images/kidsImages3.jpg', 10);
     
     
     

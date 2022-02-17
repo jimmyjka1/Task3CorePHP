@@ -6,7 +6,7 @@
     <i
     class="material-icons stars m-0 float-lg-right mt-lg-2">&#xe838;&#xe838;&#xe838;&#xe838;&#xe838;</i><br>
     <div class="cartContainer d-flex justify-content-between align-items-center">
-    <span class="color-grey price m-0">$' . $product['price'] . '</span>';
+    <span class="color-grey price m-0">₹' . $product['price'] . '</span>';
     if (isset($profile_url)){
         // check if $product['user_id'] is null or not 
         // var_dump($product);
