@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id'])) {
     $profile_url = $result['profile_image_url'];
 }
 
-$query = "SELECT p.id, p.name, p.price, p.quantity, p.category_id, p.image_url, p.description, c.user_id, c.quantity as cart_quantity, c.id as cart_id FROM cart as c JOIN product as p ON c.product_id = p.id WHERE c.user_id = :id";
+$query = "SELECT p.id, p.name, p.price, p.quantity, p.category_id, p.image_url, p.description, c.user_id, c.quantity as cart_quantity, c.id as cart_id FROM cart as c JOIN product as p ON c.product_id = p.id WHERE c.user_id = :id ORDER BY c.id DESC";
 $params = array(
     ":id" => $_SESSION['user_id']
 );

@@ -105,7 +105,7 @@ html, body {
 }
 
 .mensContainerCart {
-    margin: 20vh 14vw 5vh 14vw !important;
+    margin: 20vh 11vw 5vh 11vw !important;
 }
 
     
@@ -468,6 +468,7 @@ label.error {
      border: 1px solid red;
      color: red;
      border-radius: 4px;
+     font-size: 0.8em;
 }
 
 
@@ -476,6 +477,7 @@ label.error {
     color: white;
     background-color: red;
     border-radius: 4px;
+    font-size: 0.8em;
 }
 
 #cartFinalCheckoutTable table {
@@ -485,6 +487,13 @@ label.error {
 
 #cartFinalCheckoutTable table td, th {
     padding: 1vh;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color: grey;
+}
+
+.cartHeadingContainer {
+    padding-top: 1vh;
     border-top: 1px solid;
     border-bottom: 1px solid;
     border-color: grey;

@@ -66,6 +66,7 @@ CREATE TABLE `Product`(
     `category_id` INT NOT NULL,
     `image_url` VARCHAR(128) NOT NULL,
     `quantity` INT NOT NULL,
+    `description` VARCHAR(256) DEFAULT "Product Description not found",
     CONSTRAINT fk_product_category FOREIGN KEY (`category_id`) REFERENCES `ProductCategories`(`id`)
 );
 
@@ -76,7 +77,6 @@ CREATE TABLE `Cart`(
     `user_id` INT NOT NULL,
     `product_id` INT NOT NULL,
     `quantity` INT NOT NULL DEFAULT 1,
-    `description` VARCHAR(256) DEFAULT "Product Description not found",
     CONSTRAINT fk_cart_user FOREIGN KEY (`user_id`) REFERENCES `User`(`id`),
     CONSTRAINT fk_cart_product FOREIGN KEY (`product_id`) REFERENCES `Product`(`id`)
 );

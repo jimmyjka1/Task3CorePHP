@@ -10,9 +10,9 @@
             <li class="nav-item"><a href="#" class="nav-link">Men's</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Women's</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Kids's</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Pages</a></li>
+            <!-- <li class="nav-item"><a href="#" class="nav-link">Pages</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Explore</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Explore</a></li> -->
             <li class="nav-item">
            
                 <?php 
