@@ -84,7 +84,7 @@ if (isset($_POST['submit'])) {
 
 
             if (executeQuery($pdo, $query, $params)){
-                $_SESSION['success'] = "Passwords Updated Successfully";
+                $_SESSION['success'] = "Password Updated Successfully";
                 header("Location: changePassword.php");
                 die();
             } else {
