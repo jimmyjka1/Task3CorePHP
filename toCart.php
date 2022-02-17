@@ -117,7 +117,7 @@ if (isset($_POST['action'])) {
     } else if ($_POST['action'] == 'calculate_cost' && isset($_POST['cart_id'])){
         $cart_item_list = join(", ",$_POST['cart_id']);
         $params = array();
-        $query = "SELECT c.id, c.user_id, c.product_id, c.quantity as cart_quantity, p.quantity as p_quantity, p.name, p.price, p.quantity as product_quantity FROM cart as c INNER JOIN product as p ON p.id = c.product_id WHERE c.user_id = 1 AND c.quantity <= p.quantity AND c.id IN ($cart_item_list)";
+        $query = "SELECT c.id, c.user_id, c.product_id, c.quantity as cart_quantity, p.quantity as p_quantity, p.name, p.price, p.quantity as product_quantity FROM cart as c INNER JOIN product as p ON p.id = c.product_id WHERE c.user_id = ".$_SESSION['user_id']." AND c.quantity <= p.quantity AND c.id IN ($cart_item_list)";
 
         
         $total = 0;
