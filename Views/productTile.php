@@ -7,6 +7,11 @@
     class="material-icons stars m-0 float-lg-right mt-lg-2">&#xe838;&#xe838;&#xe838;&#xe838;&#xe838;</i><br>
     <div class="cartContainer d-flex justify-content-between align-items-center">
     <span class="color-grey price m-0">₹' . $product['price'] . '</span>';
+    if ($product['quantity'] <= 0){
+        echo '<span class="badge badge-danger">Out Of Stock</span>';
+    } else if ($product['quantity'] <= 10){
+        echo '<span class="badge border border-danger text-danger">Only '.$product['quantity'].' items left!!</span>';
+    }
     if (isset($profile_url)){
         // check if $product['user_id'] is null or not 
         // var_dump($product);

@@ -1,17 +1,17 @@
-<?php
-session_start();
-require_once "Utilities/helpers.php";
-$CURRENT_PAGE = "index";
+    <?php
+    session_start();
+    require_once "Utilities/helpers.php";
+    $CURRENT_PAGE = "index";
 
-// code to get profile image url 
-if (isset($_SESSION['user_id'])) {
-    $query = "SELECT profile_image_url FROM `User` WHERE id=:id";
-    $params = array(
-        ":id" => $_SESSION['user_id']
-    );
+    // code to get profile image url 
+    if (isset($_SESSION['user_id'])) {
+        $query = "SELECT profile_image_url FROM `User` WHERE id=:id";
+        $params = array(
+            ":id" => $_SESSION['user_id']
+        );
 
-    $result = executeQueryResult($pdo, $query, $params);
-    $profile_url = $result[0]['profile_image_url'];
+        $result = executeQueryResult($pdo, $query, $params);
+        $profile_url = $result[0]['profile_image_url'];
 
 
     $query = "SELECT p.id, p.name, p.price, p.category_id, p.image_url, p.quantity, c.user_id FROM Product as p LEFT JOIN Cart as c ON (c.product_id = p.id AND (c.user_id = :id OR c.user_id IS NULL)) WHERE p.category_id = 1 ORDER BY p.id DESC LIMIT 3; ";

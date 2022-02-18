@@ -104,9 +104,7 @@ html, body {
     margin: 20vh 7vw 5vh 7vw;
 }
 
-.mensContainerCart {
-    margin: 20vh 11vw 5vh 11vw !important;
-}
+
 
     
 
@@ -395,6 +393,10 @@ label.error {
 
 
 /* my cart */
+
+.mensContainerCart {
+    margin: 20vh 11vw 5vh 11vw !important;
+}
 .myCartProductItem {
     /* height: 24vh; */
     border-top: 1px solid;
@@ -497,6 +499,10 @@ label.error {
     border-top: 1px solid;
     border-bottom: 1px solid;
     border-color: grey;
+}
+
+.filterContainer {
+    border-radius: 5px !important;
 }
 
 
