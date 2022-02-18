@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
                     if (executeQuery($pdo, $query, $params)) {
                         $_SESSION['success'] = "Profile Image Update Successfully";
                         header("Location: editProfile.php");
-                        die();  
+                        die();
                     } else {
                         setError("Error in updating profile image");
                     }
