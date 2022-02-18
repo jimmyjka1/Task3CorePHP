@@ -1,4 +1,7 @@
 
+* {
+    /* outline: 1px solid rgba(0, 0, 0, 0.37); */
+}
 #profile_image {
     width: 30px !important;
     height: 30px !important;
@@ -37,4 +40,9 @@ li.nav-item a {
     color: inherit;
     display: inline-block;
     font-weight: bold;
+}
+
+.cart_badge {
+    top: -10px;
+    left: -5px
 }

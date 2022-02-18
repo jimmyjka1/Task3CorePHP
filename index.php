@@ -330,6 +330,8 @@
     importBootstrapJS(); ?>
 
     <script>
+        
+
         $(document).ready(function() {
             $(".cart-button").click(function(e) {
                 $element = $(this);
@@ -367,6 +369,7 @@
                         }
                     });
                 }
+                updateCartCount();
 
             });
         });

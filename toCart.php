@@ -142,5 +142,13 @@ if (isset($_POST['action'])) {
         </tr></table>';
 
         
+    } else if ($_POST['action'] == 'cart_count'){
+        $query = "SELECT count(*) as count FROM cart where user_id=:id";
+        $params = array(
+            ':id' => $_SESSION['user_id']
+        );
+
+        echo executeQueryResult($pdo, $query, $params)[0]['count'];
+
     }
 }

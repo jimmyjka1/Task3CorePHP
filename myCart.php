@@ -2,6 +2,7 @@
 session_start();
 require_once "Utilities/helpers.php";
 loginRequired();
+$CURRENT_PAGE = "cart";
 
 if (isset($_SESSION['user_id'])) {
     $query = "SELECT * FROM `User` WHERE id=:id";
@@ -88,6 +89,7 @@ $result = executeQueryResult($pdo, $query, $params);
     <?php require_once "Views/footer.php";
     importBootstrapJS(); ?>
     <script>
+        
         function calculateCost() {
             cart_id_list = [];
             all_boxes = $(".cartProductCheck:checked");
@@ -151,6 +153,7 @@ $result = executeQueryResult($pdo, $query, $params);
                         calculateCost();
                     }
                 });
+                updateCartCount();
 
             });
 

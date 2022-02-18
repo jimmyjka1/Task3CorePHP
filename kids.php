@@ -1,9 +1,9 @@
 <?php
 session_start();
 require_once "Utilities/helpers.php";
-$CURRENT_PAGE = "womens";
+$CURRENT_PAGE = "kids";
 
-$category_id = 2;
+$category_id = 3;
 
 // code to get profile image url 
 if (isset($_GET['filter_set'])) {
@@ -14,6 +14,7 @@ if (isset($_GET['filter_set'])) {
     
 
     if (isset($_SESSION['user_id'])) {
+
         if (isset($_GET['search'])) {
             $condition .= " (p.description LIKE :search OR p.name LIKE :search )";
             $params[':search'] = "%".$_GET['search']."%";
@@ -42,6 +43,7 @@ if (isset($_GET['filter_set'])) {
 
 
     } else {
+
         if (isset($_GET['search'])) {
             $condition .= " (description LIKE :search OR name LIKE :search )";
             $params[':search'] = "%".$_GET['search']."%";
@@ -56,6 +58,7 @@ if (isset($_GET['filter_set'])) {
             $condition .= " AND price <= :max ";
             $params[':max'] = $_GET['max_price'];
         }
+
 
         $query = "SELECT * FROM Product WHERE category_id = $category_id AND $condition ORDER BY id DESC";
         // var_dump($query, $params);
@@ -86,7 +89,7 @@ if (isset($_GET['filter_set'])) {
 
 
 
-$womens_products = executeQueryResult($pdo, $query, $params);
+$kids_products = executeQueryResult($pdo, $query, $params);
 
 
 ?>
@@ -106,7 +109,7 @@ $womens_products = executeQueryResult($pdo, $query, $params);
     <?php importBootstrapCSS(); ?>
 
 
-    <title>Womens - <?php echo $title ?></title>
+    <title>Kids - <?php echo $title ?></title>
 </head>
 
 <body>
@@ -146,14 +149,14 @@ $womens_products = executeQueryResult($pdo, $query, $params);
                         </div>
                     </div>
                 </form>
-                <h1 class="py-3">Womens's Latest</h1>
+                <h1 class="py-3">Kids's Latest</h1>
 
                 <div class="imageListContainer row mx-auto">
                     <?php
-                    foreach ($womens_products as $product) {
+                    foreach ($kids_products as $product) {
                         require "Views/productTile.php";
                     }
-                    if (count($womens_products) <= 0){
+                    if (count($kids_products) <= 0){
                         echo "<div class='d-flex justify-content-center align-items-center flex-column w-100'><h4 class='color-grey text-uppercase'>NO RESULTS FOUND</h4><img src='images/noResult.gif' class='w-50 h-100 d-block' id=></div>";
                     }
 

@@ -9,10 +9,30 @@
             <li class="nav-item <?php if (isset($CURRENT_PAGE) && $CURRENT_PAGE == 'index'){ echo 'active'; } ?>"><a href="index.php" class="nav-link">Home</a></li>
             <li class="nav-item <?php if (isset($CURRENT_PAGE) && $CURRENT_PAGE == 'mens'){ echo 'active'; } ?>"><a href="mens.php" class="nav-link">Men's</a></li>
             <li class="nav-item <?php if (isset($CURRENT_PAGE) && $CURRENT_PAGE == 'womens'){ echo 'active'; } ?>"><a href="womens.php" class="nav-link">Women's</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Kids's</a></li>
+            <li class="nav-item <?php if (isset($CURRENT_PAGE) && $CURRENT_PAGE == 'kids'){ echo 'active'; } ?>"><a href="kids.php" class="nav-link">Kids's</a></li>
             <!-- <li class="nav-item"><a href="#" class="nav-link">Pages</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Explore</a></li> -->
+            <?php
+                if (isset($_SESSION['user_id'])){
+                    $cartCount = executeQueryResult($pdo, "SELECT count(*) as count FROM cart WHERE user_id=:id", array(":id" => $_SESSION['user_id']))[0]['count'];
+                    $display = "";
+                    if ($cartCount <= 0){
+                        $display = "d-none";
+                    }
+
+                    $active = (isset($CURRENT_PAGE) && $CURRENT_PAGE == "cart") ? "active" : "";
+                    echo '<li class="nav-item ml-2n">
+                    <a href="myCart.php" class="nav-link ml-n1 '.$active.'">    
+                        <i class="material-icons">&#xe8cc;</i>
+                        <span class="cart_badge position-relative badge badge-danger '.$display.'" id="cartBadgeId">
+                        '.$cartCount.'
+                        </span>
+                    </a>
+                    </li>';
+                    
+                } 
+            ?>
             <li class="nav-item">
            
                 <?php 
@@ -24,7 +44,6 @@
                             '.$_SESSION['fname']." ".$_SESSION['lname'].'
                         </a>
                         <div class="dropdown-menu">
-                            <a href="myCart.php" class="dropdown-item">My Cart</a>
                             <a href="editProfile.php" class="dropdown-item">Edit Profile</a>
                             <a href="changePassword.php" class="dropdown-item">Change Password</a>
                             <div class="dropdown-divider"></div>
@@ -46,4 +65,25 @@
         </ul>
     </div>
 </nav>
+<script>
+    function updateCartCount(){
+            badge_element = $("#cartBadgeId");
+
+            $.ajax({
+                url: "toCart.php",
+                method: "POST",
+                data: {
+                    action: "cart_count",
+                },
+                success: function(response){
+                    badge_element.text(response);
+                    if (response == 0){
+                        badge_element.addClass("d-none");
+                    } else {
+                        badge_element.removeClass("d-none");
+                    }
+                }
+            });
+        }
+</script>
 
